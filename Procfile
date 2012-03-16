@@ -1,1 +1,0 @@
-web: bundle exec shotgun -p 4567 -E development

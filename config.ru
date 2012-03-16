@@ -1,9 +1,4 @@
-require './app'
+# This file is used by Rack-based servers to start the application.
 
-map '/assets' do
-  run App.sprockets
-end
-
-map '/' do
-  run App
-end
+require ::File.expand_path('../config/environment',  __FILE__)
+run ComeHome::Application
