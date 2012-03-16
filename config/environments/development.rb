@@ -30,5 +30,5 @@ ComeHome::Application.configure do
   config.assets.debug = true
 
   # Output pretty (indented) format
-  Slim::Engine.set_default_options :pretty => true
+  # Slim::Engine.set_default_options :pretty => true
 end

@@ -1,2 +1,11 @@
-h1 Home3456
-p Find me in app/views/home/index.html.slim
+.page-header
+  h1 Who's coming?
+
+ul.thumbnails.people
+  li.span2 
+    a.thumbnail#sign-up href="/rsvp"
+      img src="#{asset_path 'add-big.png'}"
+  - 1.upto(20) do
+    li.span2
+      a.thumbnail.person href="/person"
+        img src="http://placehold.it/160x160"

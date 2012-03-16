@@ -2,3 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.masthead {
+  margin-bottom: 36px;
+}
+
+.masthead h1 {
+  margin-bottom: 18px;
+}
+
+#connect-with-facebook {
+  margin-bottom: 18px;
+}
+
+.home-sign-up #sign-up {
+  margin-left: 9px;
+}
+
+#sign-up-form select, #sign-up-form input[type="text"] {
+  display: block;
+  margin-bottom: 9px;
+}
