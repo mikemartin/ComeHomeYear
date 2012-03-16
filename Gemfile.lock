@@ -52,15 +52,6 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     commonjs (0.2.0)
       therubyracer (~> 0.9.9)
-    devise (2.0.4)
-      bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.3)
-      railties (~> 3.1)
-      warden (~> 1.1.1)
-    devise-mongo_mapper (0.0.2)
-      devise
-      mongo_mapper
-      orm_adapter (>= 0.0.5)
     em-websocket (0.3.6)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
@@ -72,7 +63,6 @@ GEM
       addressable (~> 2.2)
       multipart-post (~> 1.1)
       rack (~> 1.1)
-    hashie (1.2.0)
     ffi (1.0.11)
     guard (1.0.1)
       ffi (>= 0.5.0)
@@ -81,6 +71,7 @@ GEM
       em-websocket (>= 0.2.0)
       guard (>= 0.10.0)
       multi_json (~> 1.0)
+    hashie (1.2.0)
     highline (1.6.11)
     hike (1.2.1)
     i18n (0.6.0)
@@ -130,7 +121,6 @@ GEM
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
-    orm_adapter (0.0.6)
     plucky (0.4.4)
       mongo (~> 1.5)
     polyglot (0.3.3)
@@ -193,8 +183,6 @@ GEM
     wand (0.4)
       mime-types
       safe_shell (~> 1.0.0)
-    warden (1.1.1)
-      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -203,11 +191,9 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   bson_ext
   capistrano
-  joint
-  devise
-  devise-mongo_mapper
   guard
   guard-livereload
+  joint
   mongo_mapper
   omniauth
   omniauth-facebook
@@ -217,5 +203,6 @@ DEPENDENCIES
   sass-rails
   slim
   slim-rails
+  therubyracer
   twitter-bootstrap-rails!
   uglifier (>= 1.0.3)
