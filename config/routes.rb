@@ -1,5 +1,7 @@
 ComeHome::Application.routes.draw do
   root :to => 'home#index'
+  match '/person' => 'home#person'
+  match '/rsvp' => 'home#rsvp'
 
   match "/auth/:provider/callback" => "authentication#create"
 
