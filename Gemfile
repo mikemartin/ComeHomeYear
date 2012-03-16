@@ -5,10 +5,13 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'devise'
-gem 'devise-mongo_mapper'
-gem 'mongo_mapper'
 gem 'bson_ext'
+gem 'mongo_mapper'
+gem 'joint'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-identity'
 
 gem 'slim'
 gem 'slim-rails'
@@ -28,7 +31,7 @@ group :assets do
 end
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
