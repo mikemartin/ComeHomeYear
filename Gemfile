@@ -31,8 +31,10 @@ group :assets do
 end
 
 group :development do
+  gem 'libnotify'
   gem 'guard'
   gem 'guard-livereload'
+  gem 'rack-livereload'
 end
 
 # To use ActiveModel has_secure_password
