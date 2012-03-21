@@ -1,2 +1,2 @@
 web: bundle exec rails s
-guard: bundle exec guard
+reload: bundle exec guard
