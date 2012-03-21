@@ -6,6 +6,8 @@
 
 .DS_Store
 
+.vagrant
+
 *.esproj
 
 # Ignore bundler config
