@@ -1,9 +1,11 @@
 ComeHome::Application.routes.draw do
   root :to => 'home#index'
   match '/person' => 'home#person'
-  match '/rsvp' => 'home#rsvp'
 
-  match "/auth/:provider/callback" => "authentication#create"
+  match "/login" => "authentications#new"
+  match "/logout" => "authentications#destroy"
+  match "/auth/failure" => "authentications#failure"
+  match "/auth/:provider/callback" => "authentications#create"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

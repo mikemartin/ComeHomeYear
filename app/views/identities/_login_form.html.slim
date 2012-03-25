@@ -1,0 +1,14 @@
+== form_tag "/auth/identity/callback", :class => 'form-horizontal' do
+  == field_set_tag "Login" do
+    - if @error
+      p.errors= @error
+    .control-group
+      = label_tag :auth_key, "Email", :class => "control-label"
+      .controls
+        = email_field_tag :auth_key, @identity.try(:email), :class => 'input-xlarge'
+    .control-group
+      = label_tag :password,  "Password", :class => "control-label"
+      .controls
+        = password_field_tag :password, nil, :class => 'input-xlarge'
+  .form-actions
+    = button_tag "Sign Up", :class => "btn btn-primary"

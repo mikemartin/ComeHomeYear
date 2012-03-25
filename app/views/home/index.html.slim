@@ -1,9 +1,15 @@
+- if authenticated?
+  = current_user.to_json
+  a href="#{logout_url}" logout
+- else
+  a href="#{login_url}" login
+
 .page-header
   h1= typogrify("Who's coming?")
 
 ul.thumbnails.people
   li.span2 
-    a.thumbnail#sign-up href="/rsvp"
+    a.thumbnail#sign-up href="/login"
       img src="#{asset_path 'add-big.png'}"
   - 1.upto(20) do
     li.span2
