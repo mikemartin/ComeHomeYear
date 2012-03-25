@@ -7,6 +7,10 @@ form.form-horizontal
   fieldset
     legend Sign Up
     .control-group
+      label.control-label Photo
+      .controls
+        input type="file"
+    .control-group
       label.control-label Full Name
       .controls
         input.input-xlarge type="text"
@@ -15,23 +19,24 @@ form.form-horizontal
       .controls
         input.input-xlarge type="text"
     .control-group
-      label.control-label Password
-      .controls
-        input.input-xlarge type="text"
-    .control-group
       label.control-label for="appendedPrependedInput" Location
       .controls
         .input-append
-          input#appendedPrependedInput size="16" type="text"
-          button.btn type="button" Go!
+          input type="text"
+          button.btn type="button"
+          	i.icon-map-marker
     .control-group
       label.control-label Occupation
       .controls
         input.input-xlarge type="text"
     .control-group
-      label.control-label Photo
+      label.control-label Password
       .controls
-        input type="file"
+        input.input-xlarge type="text"
+    .control-group
+      label.control-label Confirm Password
+      .controls
+        input.input-xlarge type="text"
         
     .form-actions
       button.btn.btn-primary type="submit" Sign Up
