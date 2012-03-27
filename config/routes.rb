@@ -1,11 +1,17 @@
 ComeHome::Application.routes.draw do
+  get 'users/edit'
+
   root :to => 'home#index'
   match '/person' => 'home#person'
 
-  match "/login" => "authentications#new"
-  match "/logout" => "authentications#destroy"
-  match "/auth/failure" => "authentications#failure"
-  match "/auth/:provider/callback" => "authentications#create"
+  match '/login' => 'authentications#new'
+  match '/logout' => 'authentications#destroy'
+
+  match '/profile' => 'users#edit', :via => :get, :as => :show_profile
+  match '/profile' => 'users#save', :via => :post, :as => :update_profile
+
+  match '/auth/failure' => 'authentications#failure'
+  match '/auth/:provider/callback' => 'authentications#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

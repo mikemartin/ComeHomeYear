@@ -4,18 +4,18 @@ class AuthenticationsController < ApplicationController
   end
 
   def failure
-    @error = params[:message]
     render :new
   end
   
   def create
-    user = User.from_omniauth(env['omniauth.auth'])
+    auth = request.env['omniauth.auth']
+    user = User.from_omniauth(auth)
     session[:user_id] = user.id
     redirect_to :root
   end
 
   def destroy
-    session.delete(:user_id)
+    session[:user_id] = nil
     redirect_to :root
   end
 end

@@ -1,0 +1,5 @@
+- [:notice, :error, :alert].each do |level|
+  - unless flash[level].blank?
+    div class="alert #{flash_class(level)}"
+      a.close data-dismiss="alert" ×
+      = flash[level]

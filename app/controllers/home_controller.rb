@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   def index
-  end
-  
-  def person
+    @users = User.sort(:created_at.desc).all
   end
 end

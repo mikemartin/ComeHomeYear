@@ -11,6 +11,7 @@ class User
 
   key :provider, String
   key :uid, String
+  key :email, String
   key :full_name, String
   key :occupation, String
   key :location, String
@@ -21,6 +22,9 @@ class User
   timestamps!
 
   ensure_index [[:coords, '2d']]
+  validates_presence_of :provider
+  validates_presence_of :uid
+  validates_uniqueness_of :uid, :scope => :provider
 
   attr_accessible :provider, :uid, :full_name, :occupation, :location
 
@@ -33,6 +37,7 @@ class User
       user.provider = auth['provider']
       user.uid = auth['uid']
       user.full_name = auth['info']['name']
+      user.email = auth['info']['email']
       user.location = auth['info']['location']
       user.occupation = auth['info']['occupation']
       user.save

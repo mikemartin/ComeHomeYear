@@ -1,8 +1,10 @@
 .page-header
   h1 I am coming!
-  
-a#connect-with-facebook.btn.btn-large.btn-primary href="/auth/facebook" Connect with Facebook
 
-== render "identities/login_form"
+.row
+  .span6
+    a#connect-with-facebook.btn.btn-large.btn-primary href="/auth/facebook" Connect with Facebook
+  .span6
+    == render "identities/register_form"
 
-== render "identities/register_form"
+

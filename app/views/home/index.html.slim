@@ -1,17 +1,20 @@
 - if authenticated?
-  = current_user.to_json
-  a href="#{logout_url}" logout
-- else
-  a href="#{login_url}" login
+  a href="#{show_profile_path}" profile 
+  a href="#{logout_path}" logout
 
 .page-header
   h1= typogrify("Who's coming?")
 
 ul.thumbnails.people
-  li.span2 
-    a.thumbnail#sign-up href="/login"
-      img src="#{asset_path 'add-big.png'}"
-  - 1.upto(20) do
+  - if authenticated?
+    li.span2 
+      a.thumbnail#sign-up href="/login"
+        img src="http://placehold.it/250/05C&text=Me"
+  - else
+    li.span2 
+      a.thumbnail#sign-up href="/login"
+        img src="#{asset_path 'add-big.png'}"
+  - @users.each do |u|
     li.span2
-      a.thumbnail.person href="/person"
-        img src="http://placehold.it/160x160"
+      a.thumbnail.person href="#"
+        img src="http://flickholdr.com/250/250/puffin/#{@users.index(u)}"

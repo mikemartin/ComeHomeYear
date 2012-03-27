@@ -26,24 +26,14 @@ html lang="en"
               li= link_to "Link 1", "/path1"
               li= link_to "Link 2", "/path2"
               li= link_to "Link 3", "/path3"
-
     .container
-
+      .alert.alert-info
+        ' current user:
+        = current_user.inspect
       .content
-        .row
-          .span9
-            = yield
-          .span3
-            .well.sidebar-nav
-              h3 Sidebar
-              ul.nav.nav-list
-                li.nav-header Sidebar
-                li= link_to "Link 1", "/path1"
-                li= link_to "Link 2", "/path2"
-                li= link_to "Link 3", "/path3"
-    
+        = yield
       footer
         markdown:
           A project by [Mike Martin](http://michaelmartin.ca) and [Alexis Georges](http://albatross.io)
     
-    = javascript_include_tag "application"
+    / = javascript_include_tag "application"
