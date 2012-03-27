@@ -18,4 +18,15 @@ module ApplicationHelper
     when :alert then 'alert-alert'
     end
   end
+
+  def has_error(model, *keys)
+    return unless model && model.invalid?
+    (keys.map {|k| model.errors.include?(k)}).any?
+  end
+
+  def field_error(model, key)
+    @identity && @identity.invalid? && @identity
+    return unless model && model.invalid? && model.errors.include?(key)
+    model.errors.get(key).first
+  end
 end

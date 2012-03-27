@@ -2,18 +2,20 @@
   == field_set_tag "Sign up" do
     - if @identity && @identity.errors.any?
         .alert.alert-error Oops! Please correct the errors below
-        = @identity.errors.inspect
-    .control-group
+    div class="control-group #{'error' if has_error(@identity, :email)}"
       = label_tag :email, "Email", :class => "control-label"
       .controls
         = email_field_tag :email, @identity.try(:email), :class => 'input-xlarge'
-    .control-group
+        p.help-inline= field_error(@identity, :email)
+    div class="control-group #{'error' if has_error(@identity, :password, :password_digest)}"
       = label_tag :password, "Password", :class => "control-label"
       .controls
         = password_field_tag :password, nil, :class => 'input-xlarge'
-    .control-group
+        p.help-inline= field_error(@identity, :password_digest)
+    div class="control-group #{'error' if has_error(@identity, :password, :password_digest)}"
       = label_tag :password_confirmation, "Confirm password", :class => "control-label"
       .controls
-        = password_field_tag :password_confirmation, nil, :class => 'input-xlarge'    
+        = password_field_tag :password_confirmation, nil, :class => 'input-xlarge'
+        p.help-inline= field_error(@identity, :password_digest)
   .form-actions
     = button_tag "Sign Up", :class => "btn btn-primary"

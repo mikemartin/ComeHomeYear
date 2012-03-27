@@ -24,6 +24,7 @@ class User
   ensure_index [[:coords, '2d']]
   validates_presence_of :provider
   validates_presence_of :uid
+  validates_inclusion_of :occupation, :in => OCCUPATIONS
   validates_uniqueness_of :uid, :scope => :provider
 
   attr_accessible :provider, :uid, :full_name, :occupation, :location

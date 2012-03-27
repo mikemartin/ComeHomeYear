@@ -5,6 +5,7 @@ class Identity
   key :email, String
   key :password_digest, String
 
+  validates_presence_of :email
   validates_uniqueness_of :email
 
   belongs_to :user
