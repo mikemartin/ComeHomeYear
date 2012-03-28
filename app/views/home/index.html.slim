@@ -5,6 +5,13 @@
 .page-header
   h1= typogrify("Who's coming?")
 
+  .btn-toolbar
+    .btn-group
+      a.btn.btn-large.active href="#"
+        i.icon-th-large
+      a.btn.btn-large href="#"
+        i.icon-map-marker
+      
 ul.thumbnails.people
   - if authenticated?
     li.span2 

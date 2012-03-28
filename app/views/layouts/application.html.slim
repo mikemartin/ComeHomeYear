@@ -15,20 +15,13 @@ html lang="en"
     link href="/favicon.ico" rel="shortcut icon"
 
   body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.brand href="/"Come Home Year 2012
-          .container.nav-collapse
-            ul.nav
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
     .container
+      header.masthead
+        .inner
+          h1 
+            a href="/" Come Home Year 2012
+          p.lead A simple description describing the purpose of this site.
+          
       .alert.alert-info
         ' current user:
         = current_user.inspect
