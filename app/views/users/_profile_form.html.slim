@@ -15,6 +15,13 @@
             button.btn
               i.icon-map-marker
       .control-group
+        = f.label :location, :class => "control-label"
+        .controls
+          .input-append
+            = f.text_field :location, :class => 'input-xlarge', :id => 'searchLocation'
+            button.btn#getLocation
+              i.icon-map-marker
+      .control-group
         = f.label :occupation, :class => "control-label"
         .controls
           = f.select :occupation, options_for_select(User::OCCUPATIONS, current_user.occupation)
