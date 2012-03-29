@@ -16,6 +16,9 @@
 # Ignore compiled assets
 /public/assets
 
+# Ignore uploaded (test) images
+/public/system
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 

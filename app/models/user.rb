@@ -1,7 +1,7 @@
 class User
   include MongoMapper::Document
   include Geocoder::Model::MongoMapper
-  plugin Joint
+  include Paperclip::Glue
 
   OCCUPATIONS = %w[
     Accountant
@@ -18,7 +18,10 @@ class User
   key :location, String
   key :coords, Array
 
-  attachment :photo
+  key :photo_file_name, String
+  key :photo_content_type, String
+
+  has_attached_file :photo, :styles => { :grid => "320x320>"}
 
   timestamps!
 
@@ -38,7 +41,7 @@ class User
   validates_inclusion_of :occupation, :in => OCCUPATIONS, :allow_blank => true
   validates_uniqueness_of :uid, :scope => :provider
 
-  attr_accessible :provider, :uid, :full_name, :occupation, :location
+  attr_accessible :provider, :uid, :full_name, :occupation, :location, :photo
 
   def self.from_omniauth (auth)
     find_by_provider_and_uid(auth['provider'], auth['uid']) || create_with_omniauth(auth)

@@ -1,0 +1,1 @@
+ Paperclip.options[:logger] = Rails.logger

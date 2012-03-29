@@ -15,6 +15,8 @@ gem 'omniauth-identity'
 
 gem 'geocoder'
 
+gem 'paperclip'
+
 gem 'slim'
 gem 'slim-rails'
 gem 'rdiscount'

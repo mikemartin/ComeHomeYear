@@ -1,6 +1,6 @@
 == render "/message"
 
-== form_tag update_profile_path, :class => 'form-horizontal' do
+== form_tag update_profile_path, :multipart => true, :class => 'form-horizontal' do
   == field_set_tag "Edit your info" do
     == fields_for current_user do |f|
       .control-group
@@ -18,42 +18,10 @@
         = f.label :occupation, :class => "control-label"
         .controls
           = f.select :occupation, options_for_select(User::OCCUPATIONS, current_user.occupation)
+      .control-group
+        = f.label :photo, :class => "control-label"
+        .controls
+          = f.file_field :photo
+
   .form-actions
     = button_tag "Save", :class => "btn btn-primary"
-
-/ == form_tag "/auth/identity/register", :class => 'form-horizontal' do
-/   == field_set_tag "Sign up" do
-/     - if @identity && @identity.errors.any?
-/         p.error Oops! Please make sure there are no errors.
-/         p= @identity.errors.full_messages
-/     .control-group
-/       = label_tag :name, "Full name", :class => "control-label"
-/       .controls
-/         = text_field_tag :name, @identity.try(:name), :class => 'input-xlarge'
-/     / .control-group
-/     /   = label_tag :email, "Email", :class => "control-label"
-/     /   .controls
-/     /     = email_field_tag :email, @identity.try(:email), :class => 'input-xlarge'
-/     /     - if @identity && @identity.invalid?(:email)
-/     /       span.help-inline= @identity.errors[:email]
-/     .control-group
-/       = label_tag :location, "Location", :class => "control-label"
-/       .controls
-/         .input-append
-/           = text_field_tag :location, @identity.try(:location)
-/           button.btn
-/             i.icon-map-marker
-/     .control-group
-/       = label_tag :occupation, "Occupation", :class => "control-label"
-/       .controls
-/         = select_tag :occupation, options_for_select(User::OCCUPATIONS, @identity.try(:occupation)), :class => 'input-xlarge'
-/     / .control-group
-/     /   = label_tag :password,  "Password", :class => "control-label"
-/     /   .controls
-/     /     = password_field_tag :password, nil, :class => 'input-xlarge'
-/     / .control-group
-/     /   = label_tag :password_confirmation, "Confirm password", :class => "control-label"
-/     /   .controls
-/     /     = password_field_tag :password_confirmation, nil, :class => 'input-xlarge'    
-/   .form-actions
-/     = button_tag "Sign Up", :class => "btn btn-primary"
