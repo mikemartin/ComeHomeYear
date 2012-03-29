@@ -15,12 +15,34 @@ html lang="en"
     link href="/favicon.ico" rel="shortcut icon"
 
   body
+    .navbar.navbar-fixed-top
+      .navbar-inner 
+        .container
+          a#date-location href="#" August 9th to 13th, 2012
+          .nav-collapse
+            ul.nav
+              li
+                a href="#{login_path}" Login
+              li
+                a href="#{login_path}" Sign Up
+            - if authenticated? 
+              li
+                a href="#{show_profile_path}" profile 
+              li
+                a href="#{logout_path}" logout 
+  
+          
     .container
       header.masthead
         .inner
           h1 
-            a href="/" Come Home Year 2012
-          p.lead A simple description describing the purpose of this site.
+            a href="/"= typogrify("St. Shott's Come Home Year")
+          p.lead
+            ' It's been a while, check out 
+            a href="#who" data-toggle="tab" who's coming home 
+            ' and 
+            a href="#where" data-toggle="tab" where they are now
+            '!
           
       .alert.alert-info
         ' current user:
