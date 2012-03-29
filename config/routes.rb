@@ -1,4 +1,6 @@
 ComeHome::Application.routes.draw do
+  get "geolocation/reverse_geocode"
+
   get 'users/edit'
 
   root :to => 'home#index'
@@ -12,6 +14,8 @@ ComeHome::Application.routes.draw do
 
   match '/auth/failure' => 'authentications#failure'
   match '/auth/:provider/callback' => 'authentications#create'
+
+  match '/reverse_geocode' => 'geolocation#reverse_geocode'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

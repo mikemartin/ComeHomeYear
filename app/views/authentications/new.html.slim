@@ -2,9 +2,11 @@
   h1 I am coming!
 
 .row
-  .span4
+  .span5
     a#connect-with-facebook.btn.btn-large.btn-primary href="/auth/facebook" Connect with Facebook
-  .span8
+    == render "identities/login_form"
+
+  .span7
     == render "identities/register_form"
 
 

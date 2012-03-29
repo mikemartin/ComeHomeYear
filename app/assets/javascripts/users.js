@@ -1,18 +1,47 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+(function($) {
 
-// Location field autocomplete using Google Places API
-var input = document.getElementById('searchLocation');        
-var autocomplete = new google.maps.places.Autocomplete(input); 
+  var input;
 
-// Get current location and populate location field
-$("#getLocation").click(initiate_geolocation);  
+  function updateFieldWithLocation(evt) {
+    $.when(geolocate()).then(updateField, showError);
+    return false;
+  };
 
-function initiate_geolocation() {  
-  navigator.geolocation.getCurrentPosition(handle_geolocation_query);  
-}  
+  function geolocate() {
+    var dfd = $.Deferred();
 
-function handle_geolocation_query(position){  
-  alert('Lat: ' + position.coords.latitude + ' ' +  
-        'Lon: ' + position.coords.longitude);  
-}  
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lat = position.coords.latitude, lng = position.coords.longitude;
+
+      return reverseGeocode(lat, lng).then(
+        function(location) { dfd.resolve(location); },
+        function() { dfd.reject(); }
+      ).promise();
+    });
+
+    return dfd.promise();
+  };
+
+  function reverseGeocode(lat, lng) {
+    return $.get('/reverse_geocode', {lat: lat, lng: lng}, function(data) {
+      return data;
+    });
+  };
+
+  function updateField(location) {
+    input.val(location);
+  };
+
+  function showError() {
+    console.log('failed to find location');
+  };
+
+  $(function() {
+    input = $('#searchLocation');
+    var autocomplete = new google.maps.places.Autocomplete(input[0]);
+    $(document).delegate('a#getLocation', 'click', updateFieldWithLocation);
+  });
+
+}($));

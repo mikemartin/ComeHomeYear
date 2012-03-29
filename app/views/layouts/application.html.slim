@@ -23,6 +23,13 @@ html lang="en"
           p.lead A simple description describing the purpose of this site.
           
       .alert.alert-info
+        -if authenticated?
+          a href="#{logout_path}" logout
+          '
+          a href="#{show_profile_path}" profile
+        - else
+          a href="#{login_path}" login
+        ' 
         ' current user:
         = current_user.inspect
       .content

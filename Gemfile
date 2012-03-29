@@ -13,6 +13,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-identity'
 
+gem 'geocoder'
+
 gem 'slim'
 gem 'slim-rails'
 gem 'rdiscount'

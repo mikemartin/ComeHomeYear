@@ -1,5 +1,5 @@
 == form_tag "/auth/identity/callback", :class => 'form-horizontal' do
-  == field_set_tag "Login" do
+  == field_set_tag "Already have an account?" do
     - if @error
       p.errors= @error
     .control-group
@@ -11,4 +11,4 @@
       .controls
         = password_field_tag :password, nil, :class => 'input-xlarge'
   .form-actions
-    = button_tag "Sign Up", :class => "btn btn-primary"
+    = button_tag "Login", :class => "btn btn-primary"

@@ -1,5 +1,6 @@
 class User
   include MongoMapper::Document
+  include Geocoder::Model::MongoMapper
   plugin Joint
 
   OCCUPATIONS = %w[
@@ -20,6 +21,14 @@ class User
   attachment :photo
 
   timestamps!
+
+  geocoded_by :location, :coordinates => :coords do |obj, results|
+    if geo = results.first
+      obj.location = "#{geo.city}, #{geo.country}"
+    end
+  end
+
+  after_validation :geocode
 
   ensure_index [[:coords, '2d']]
   validates_presence_of :provider
