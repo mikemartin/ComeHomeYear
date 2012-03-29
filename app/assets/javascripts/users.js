@@ -40,8 +40,11 @@
 
   $(function() {
     input = $('#searchLocation');
-    var autocomplete = new google.maps.places.Autocomplete(input[0]);
-    $(document).delegate('a#getLocation', 'click', updateFieldWithLocation);
+
+    if (input.length) {
+      var autocomplete = new google.maps.places.Autocomplete(input[0]);
+      $(document).delegate('a#getLocation', 'click', updateFieldWithLocation);
+    }
   });
 
 }($));
