@@ -4,6 +4,15 @@
 
   var input;
 
+  $(function() {
+    input = $('#searchLocation');
+
+    if (input.length) {
+      var autocomplete = new google.maps.places.Autocomplete(input[0]);
+      $(document).delegate('a#getLocation', 'click', updateFieldWithLocation);
+    }
+  });
+
   function updateFieldWithLocation(evt) {
     $.when(geolocate()).then(updateField, showError);
     return false;
@@ -37,14 +46,5 @@
   function showError() {
     console.log('failed to find location');
   };
-
-  $(function() {
-    input = $('#searchLocation');
-
-    if (input.length) {
-      var autocomplete = new google.maps.places.Autocomplete(input[0]);
-      $(document).delegate('a#getLocation', 'click', updateFieldWithLocation);
-    }
-  });
 
 }($));

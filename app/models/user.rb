@@ -24,6 +24,7 @@ class User
 
   geocoded_by :location, :coordinates => :coords do |obj, results|
     if geo = results.first
+      obj.coords = [geo.latitude, geo.longitude]
       obj.location = "#{geo.city}, #{geo.country}"
     end
   end
@@ -31,9 +32,10 @@ class User
   after_validation :geocode
 
   ensure_index [[:coords, '2d']]
+  
   validates_presence_of :provider
   validates_presence_of :uid
-  validates_inclusion_of :occupation, :in => OCCUPATIONS
+  validates_inclusion_of :occupation, :in => OCCUPATIONS, :allow_blank => true
   validates_uniqueness_of :uid, :scope => :provider
 
   attr_accessible :provider, :uid, :full_name, :occupation, :location
