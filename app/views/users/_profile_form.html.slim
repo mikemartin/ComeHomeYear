@@ -1,12 +1,15 @@
 == render "/message"
 
-== form_tag update_profile_path, :multipart => true, :class => 'form-horizontal' do
+== form_tag update_profile_path, :multipart => true, :class => 'form-inline' do
   == field_set_tag "Edit your info" do
+    - if current_user.errors.any?
+      .alert.alert-error Oops! Please correct the errors below
+      p= current_user.errors.inspect  
     == fields_for current_user do |f|
       .control-group
         = f.label :full_name, :class => "control-label"
         .controls
-          = f.text_field :full_name
+          = f.text_field :full_name, :class => 'input-xlarge'
       .control-group
         = f.label :location, :class => "control-label"
         .controls
@@ -18,10 +21,13 @@
         = f.label :occupation, :class => "control-label"
         .controls
           = f.select :occupation, options_for_select(User::OCCUPATIONS, current_user.occupation)
-      .control-group
+          p.help-inline= field_error(current_user, :occupation)
+      div class="control-group #{'error' if has_error(current_user, :photo_file_size)}"
         = f.label :photo, :class => "control-label"
         .controls
           = f.file_field :photo
+          p.help-inline= field_error(current_user, :photo_file_size)
+  = button_tag "Save", :class => "btn btn-primary"
 
-  .form-actions
-    = button_tag "Save", :class => "btn btn-primary"
+#avatar
+  img src="#{current_user.photo.url}"

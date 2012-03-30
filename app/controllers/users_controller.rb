@@ -4,8 +4,11 @@ class UsersController < ApplicationController
 
   def save
     @user = current_user
-    @user.update_attributes(params[:user])
-    flash[:notice] = 'Profile updated!'
-    redirect_to :show_profile
+    if @user.update_attributes(params[:user])
+      flash[:notice] = 'Profile updated!'
+      redirect_to :show_profile
+    else
+      render :edit
+    end
   end
 end

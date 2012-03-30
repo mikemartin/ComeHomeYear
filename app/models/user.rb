@@ -19,9 +19,13 @@ class User
   key :coords, Array
 
   key :photo_file_name, String
+  key :photo_file_size, Integer
   key :photo_content_type, String
 
-  has_attached_file :photo, :styles => { :grid => "320x320>"}
+  has_attached_file :photo, :styles => {
+    :grid => '320x320>',
+    :full => '680x320>'
+  }
 
   timestamps!
 
@@ -40,6 +44,7 @@ class User
   validates_presence_of :uid
   validates_inclusion_of :occupation, :in => OCCUPATIONS, :allow_blank => true
   validates_uniqueness_of :uid, :scope => :provider
+  validates_attachment :photo, :size => {:less_than => 500.kilobytes}
 
   attr_accessible :provider, :uid, :full_name, :occupation, :location, :photo
 

@@ -11,5 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.jcrop
 //= require twitter/bootstrap
 //= require_tree .

@@ -25,8 +25,7 @@ module ApplicationHelper
   end
 
   def field_error(model, key)
-    @identity && @identity.invalid? && @identity
-    return unless model && model.invalid? && model.errors.include?(key)
+    return if !model || model.valid? || !model.errors.include?(key)
     model.errors.get(key).first
   end
 end

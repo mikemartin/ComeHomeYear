@@ -19,7 +19,7 @@
     ul.thumbnails.people
       - if authenticated?
         li.span2 
-          a.thumbnail#sign-up href="#{show_profile_path}"
+          a.thumbnail#self href="#{show_profile_path}"
             img src="#{current_user.photo.url(:grid)}"
       - else
         li.span2 
