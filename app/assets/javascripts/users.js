@@ -1,50 +1,47 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-(function($) {
+(function() {
 
-  var input;
+  var updateFieldWithLocation = function(el) {
+    $.when(ComeHome.geolocation.getCurrentLocation()).then(
+      function(location) { el.val(location); },
+      function() { console.error('failed to get position'); }
+    );
+  };
+
+  var trackCoords = function(coords) {
+    $('#user_crop_x').val(Math.floor(coords.x * photoRatio));
+    $('#user_crop_y').val(Math.floor(coords.y * photoRatio));
+    $('#user_crop_w').val(Math.floor(coords.w * photoRatio));
+    $('#user_crop_h').val(Math.floor(coords.h * photoRatio));
+  };
 
   $(function() {
-    input = $('#searchLocation');
-
+    var input = $('#searchLocation');
+    
     if (input.length) {
-      var autocomplete = new google.maps.places.Autocomplete(input[0]);
-      $(document).delegate('a#getLocation', 'click', updateFieldWithLocation);
+      new google.maps.places.Autocomplete(input[0]);
+
+      $(document).delegate('a#getLocation', 'click', function() {
+        updateFieldWithLocation(input);
+      });
+    }
+
+    var canvas = $('#canvas img');
+
+    if (canvas.length) {
+      canvas.Jcrop({
+        aspectRatio: 1,
+        allowSelect: true,
+        allowMove: true,
+        allowResize: true,
+        minSize: [320, 320],
+        maxSize: [320, 320],
+        setSelect: [0, 0, 320, 320],
+        onChange: trackCoords,
+        onSelect: trackCoords
+      });
     }
   });
 
-  function updateFieldWithLocation(evt) {
-    $.when(geolocate()).then(updateField, showError);
-    return false;
-  };
-
-  function geolocate() {
-    var dfd = $.Deferred();
-
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var lat = position.coords.latitude, lng = position.coords.longitude;
-
-      return reverseGeocode(lat, lng).then(
-        function(location) { dfd.resolve(location); },
-        function() { dfd.reject(); }
-      ).promise();
-    });
-
-    return dfd.promise();
-  };
-
-  function reverseGeocode(lat, lng) {
-    return $.get('/reverse_geocode', {lat: lat, lng: lng}, function(data) {
-      return data;
-    });
-  };
-
-  function updateField(location) {
-    input.val(location);
-  };
-
-  function showError() {
-    console.log('failed to find location');
-  };
-
-}($));
+}).call(this);

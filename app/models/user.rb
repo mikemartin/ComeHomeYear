@@ -23,9 +23,9 @@ class User
   key :photo_content_type, String
 
   has_attached_file :photo, :styles => {
-    :grid => '320x320>',
-    :full => '680x320>'
-  }
+    :grid => '320x320#',
+    :large => '1024x768>'
+  }, :processors => [:cropper]
 
   timestamps!
 
@@ -37,6 +37,7 @@ class User
   end
 
   after_validation :geocode
+  after_update :reprocess_photo, :if => :cropping?
 
   ensure_index [[:coords, '2d']]
   
@@ -44,9 +45,23 @@ class User
   validates_presence_of :uid
   validates_inclusion_of :occupation, :in => OCCUPATIONS, :allow_blank => true
   validates_uniqueness_of :uid, :scope => :provider
-  validates_attachment :photo, :size => {:less_than => 500.kilobytes}
 
-  attr_accessible :provider, :uid, :full_name, :occupation, :location, :photo
+  validates_attachment :photo, :size => {:less_than => 1.megabyte},
+    :content_type => {:content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png']}
+
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessible :provider, :uid, :full_name, :occupation, :location, :photo,
+    :crop_x, :crop_y, :crop_w, :crop_h
+
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def photo_geometry(style=:original)
+    return unless photo?
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(photo.path(style))
+  end
 
   def self.from_omniauth (auth)
     find_by_provider_and_uid(auth['provider'], auth['uid']) || create_with_omniauth(auth)
@@ -62,5 +77,11 @@ class User
       user.occupation = auth['info']['occupation']
       user.save
     end
+  end
+
+  private
+
+  def reprocess_photo
+    photo.reprocess!
   end
 end

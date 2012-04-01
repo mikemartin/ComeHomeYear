@@ -1,0 +1,15 @@
+- content_for :app_data do
+  - if current_user.photo?
+    javascript:
+      var photoRatio = #{current_user.photo_geometry(:original).width} / #{current_user.photo_geometry(:large).width};
+
+== form_for current_user, :method => :post, :url => update_profile_path do |f|
+  == field_set_tag 'Edit your profile photo' do
+    #canvas
+      img src="#{current_user.photo.url(:large)}"
+    = f.hidden_field 'crop_x'
+    = f.hidden_field 'crop_y'
+    = f.hidden_field 'crop_w'
+    = f.hidden_field 'crop_h'
+    .form-actions
+      = button_tag "Save", :class => "btn btn-primary"

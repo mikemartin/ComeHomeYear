@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery.jcrop
 //= require twitter/bootstrap
+//
+//= require come-home
+//= require_tree ./lib
 //= require_tree .
