@@ -5,10 +5,10 @@
     .control-group
       = label_tag :auth_key, "Email", :class => "control-label"
       .controls
-        = email_field_tag :auth_key, @identity.try(:email), :class => 'input-xlarge'
+        = email_field_tag :auth_key, @identity.try(:email)
     .control-group
       = label_tag :password,  "Password", :class => "control-label"
       .controls
-        = password_field_tag :password, nil, :class => 'input-xlarge'
+        = password_field_tag :password, nil
   .form-actions
     = button_tag "Login", :class => "btn btn-primary"

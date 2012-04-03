@@ -17,16 +17,18 @@ html lang="en"
           a#date-location href="#" August 9th to 13th, 2012
           .nav-collapse
             ul.nav
+              li
+                a href="/" Home 
               - if authenticated? 
                 li
-                  a href="#{show_profile_path}" profile 
+                  a href="#{show_profile_path}" Profile 
                 li
-                  a href="#{logout_path}" logout 
+                  a href="#{logout_path}" Logout 
               - else
                 li
                   a href="#{login_path}" Login
                 li
-                  a href="#{login_path}" Sign Up
+                  a href="#{new_path}" Sign Up
 
     .container
       header.masthead

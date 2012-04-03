@@ -6,7 +6,8 @@ ComeHome::Application.routes.draw do
   root :to => 'home#index'
   match '/person' => 'home#person'
 
-  match '/login' => 'authentications#new'
+  match '/login' => 'authentications#login'
+  match '/new' => 'authentications#new'
   match '/logout' => 'authentications#destroy'
 
   match '/profile' => 'users#edit', :via => :get, :as => :show_profile

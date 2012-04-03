@@ -23,7 +23,7 @@
             img src="#{current_user.photo.url(:grid)}"
       - else
         li.span2 
-          a.thumbnail#sign-up href="#{login_path}"
+          a.thumbnail#sign-up href="#{new_path}"
             img src="#{asset_path 'add-big.png'}"
       - @users.each do |u|
         li.span2

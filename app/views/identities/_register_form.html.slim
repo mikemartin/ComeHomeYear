@@ -1,21 +1,28 @@
 == form_tag "/auth/identity/register", :class => 'form-horizontal' do
-  == field_set_tag "Sign up" do
+  == field_set_tag "I'm coming home!" do
     - if @identity && @identity.errors.any?
         .alert.alert-error Oops! Please correct the errors below
+    .control-group
+      a#connect-with-facebook.btn.btn-large.btn-primary href="/auth/facebook" Login with Facebook
+      p Or create an account
     div class="control-group #{'error' if has_error(@identity, :email)}"
       = label_tag :email, "Email", :class => "control-label"
       .controls
-        = email_field_tag :email, @identity.try(:email), :class => 'input-xlarge'
+        = email_field_tag :email, @identity.try(:email)
         p.help-inline= field_error(@identity, :email)
     div class="control-group #{'error' if has_error(@identity, :password, :password_digest)}"
       = label_tag :password, "Password", :class => "control-label"
       .controls
-        = password_field_tag :password, nil, :class => 'input-xlarge'
+        = password_field_tag :password, nil
         p.help-inline= field_error(@identity, :password_digest)
     div class="control-group #{'error' if has_error(@identity, :password, :password_digest)}"
       = label_tag :password_confirmation, "Confirm password", :class => "control-label"
       .controls
-        = password_field_tag :password_confirmation, nil, :class => 'input-xlarge'
+        = password_field_tag :password_confirmation, nil
         p.help-inline= field_error(@identity, :password_digest)
+    .control-group
+      label.control-label for="question" What was the name of the sod farm?
+      .controls
+        input name="question" type="text"
     .form-actions
       = button_tag "Sign Up", :class => "btn btn-primary"
