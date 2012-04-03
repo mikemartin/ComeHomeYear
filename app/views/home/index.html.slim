@@ -7,15 +7,15 @@
 
   .btn-toolbar
     ul.btn-group
-      li.btn.btn-large
+      li.btn.btn-large.active
         a href="#who" data-toggle="tab"
           i.icon-th-large
-      li.btn.btn-large.active
+      li.btn.btn-large
         a href="#where" data-toggle="tab"
           i.icon-map-marker
 
 .tab-content
-  #who.tab-pane.fade
+  #who.tab-pane.fade.in.active
     ul.thumbnails.people
       - if authenticated?
         li.span2 
@@ -29,5 +29,5 @@
         li.span2
           a.thumbnail.person href="#"
             img src="#{u.photo.url(:grid)}"
-  #where.tab-pane.fade.in.active
+  #where.tab-pane.fade
     #map
