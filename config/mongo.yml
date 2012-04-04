@@ -14,5 +14,5 @@ test:
 production:
   <<: *defaults
   database: come_home
-  username: <%= ENV['MONGO_USERNAME'] %>
-  password: <%= ENV['MONGO_PASSWORD'] %>
+  username: <%= ENV['COME_HOME_MONGO_USERNAME'] %>
+  password: <%= ENV['COME_HOME_MONGO_PASSWORD'] %>
