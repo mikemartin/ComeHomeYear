@@ -78,9 +78,8 @@ class User
       user.location = auth['info']['location']
       user.occupation = auth['info']['occupation']
 
-      if auth['info'].has_key?('image')
-        user.set_photo_from_url(auth['info']['image'])
-      end
+      # this should go somewhere else
+      user.set_photo_from_url("http://graph.facebook.com/#{user.uid}/picture?type=large")
       
       user.save
     end
