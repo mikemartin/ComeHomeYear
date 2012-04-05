@@ -48,7 +48,7 @@ class User
   validates_inclusion_of :occupation, :in => OCCUPATIONS, :allow_blank => true
   validates_uniqueness_of :uid, :scope => :provider
 
-  validates_attachment :photo, :size => {:less_than => 1.megabyte},
+  validates_attachment :photo, :size => {:less_than => 2.megabyte},
     :content_type => {:content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif']}
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
