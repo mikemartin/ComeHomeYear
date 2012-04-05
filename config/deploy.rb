@@ -36,4 +36,4 @@ Cape do
   # mirror_rake_tasks :build
 end
 
-after :deploy, 'deploy:restart'
+after :deploy, 'sprockets:precompile', 'deploy:restart'
