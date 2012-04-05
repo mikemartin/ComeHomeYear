@@ -42,16 +42,17 @@ html lang="en"
             a href="#where" data-toggle="tab" where they are now
             '!
           
-      .alert.alert-info
-        -if authenticated?
-          a href="#{logout_path}" logout
-          '
-          a href="#{show_profile_path}" profile
-        - else
-          a href="#{login_path}" login
-        ' 
-        ' current user:
-        = current_user.inspect
+      - if development?
+        .alert.alert-info
+          -if authenticated?
+            a href="#{logout_path}" logout
+            '
+            a href="#{show_profile_path}" profile
+          - else
+            a href="#{login_path}" login
+          ' 
+          ' current user:
+          = current_user.inspect
       .content
         = yield
       footer
