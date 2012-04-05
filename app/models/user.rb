@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class User
   include MongoMapper::Document
   include Geocoder::Model::MongoMapper
@@ -47,7 +49,7 @@ class User
   validates_uniqueness_of :uid, :scope => :provider
 
   validates_attachment :photo, :size => {:less_than => 1.megabyte},
-    :content_type => {:content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png']}
+    :content_type => {:content_type => ['image/jpeg', 'image/pjpeg', 'image/jpg', 'image/png', 'image/gif']}
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessible :provider, :uid, :full_name, :occupation, :location, :photo,
@@ -75,8 +77,21 @@ class User
       user.email = auth['info']['email']
       user.location = auth['info']['location']
       user.occupation = auth['info']['occupation']
+
+      if auth['info'].has_key?('image')
+        user.set_photo_from_url(auth['info']['image'])
+      end
+      
       user.save
     end
+  end
+
+  def set_photo_from_url(url)
+    temp = Tempfile.new(url.parameterize)
+    temp.binmode
+    temp.write(open(url).read)
+    temp.flush
+    self.photo = temp
   end
 
   private

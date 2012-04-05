@@ -11,7 +11,7 @@ class AuthenticationsController < ApplicationController
     auth = request.env['omniauth.auth']
     user = User.from_omniauth(auth)
     session[:user_id] = user.id
-    redirect_to :root
+    redirect_to :show_profile
   end
 
   def destroy
