@@ -1,6 +1,8 @@
 require 'cape'
 require 'bundler/capistrano'
 
+load 'deploy/assets'
+
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
@@ -36,4 +38,4 @@ Cape do
   # mirror_rake_tasks :build
 end
 
-after :deploy, 'sprockets:precompile', 'deploy:restart'
+after :deploy, 'deploy:restart'
