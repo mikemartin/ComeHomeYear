@@ -79,7 +79,9 @@ class User
       user.occupation = auth['info']['occupation']
 
       # this should go somewhere else
-      user.set_photo_from_url("http://graph.facebook.com/#{user.uid}/picture?type=large")
+      if auth['provider'] == 'facebook'
+        user.set_photo_from_url("http://graph.facebook.com/#{user.uid}/picture?type=large")
+      end
       
       user.save
     end
